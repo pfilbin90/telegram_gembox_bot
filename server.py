@@ -2,17 +2,23 @@ from bot import telegram_chatbot
 import update_gembox
 import datetime
 bot = telegram_chatbot("config.cfg")
+from dbhelper import DBHelper
+
+db = DBHelper()
 
 def make_reply(msg, quoted_message, user, date, gemresponse, groupid, from_):
     reply = None
     if msg is not None and "/gembox add" in msg:
         reply = update_gembox.add_to_gembox(msg, quoted_message, user, date, gemresponse, groupid, from_)
-    if msg is not None and "/gembox read" in msg:
-        reply = update_gembox.read_from_gembox(msg, quoted_message, user, date, gemresponse, groupid, from_)
+    elif msg is not None and "/gembox read" in msg:
+        reply = print("WHY ISNT WORKING")
+        #reply = update_gembox.read_from_gembox(msg, quoted_message, user, date, gemresponse, groupid, from_)
+
     return reply
 
 update_id = None
 while True:
+    db.setup()
     updates = bot.get_updates(offset=update_id)
     updates = updates["result"]
     if updates:
