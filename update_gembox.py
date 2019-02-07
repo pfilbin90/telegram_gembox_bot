@@ -26,7 +26,9 @@ def gembox_read_vault(message):
            # print("from_: " + str(from_))
 
             items = db.get_items()
-            quoted_message = "\n".join(items)
+            counter_list = list(enumerate(items, 1))
+            quoted_message = "\n".join(counter_list)
+
         except KeyError:
             print("There was an error")
         return quoted_message
