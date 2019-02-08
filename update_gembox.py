@@ -12,8 +12,7 @@ def gembox_add(msg, user, date, gemresponse, chat_id, from_):
         quoted_message = "\n".join(items)
         bot.send_message(gemresponse, chat_id)
         bot.send_message(quoted_message, chat_id)
-    except KeyError:
-        print("There was an error")
+    except Exception as e: return(e)
     return quoted_message
 
 def gembox_read_vault(message):
@@ -27,8 +26,7 @@ def gembox_read_vault(message):
 
             items = db.get_items()
             counter_list = list(enumerate(items, 1))
-            quoted_message = "\n".join(counter_list)
+            msg = '\n'.join([str(i) for i in counter_list])
 
-        except KeyError:
-            print("There was an error")
-        return quoted_message
+        except Exception as e: return(e)
+        return msg

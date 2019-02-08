@@ -28,7 +28,7 @@ while True:
             update_id = item["update_id"]
             user = item["message"]["from"]["first_name"]
             epoch = item["message"]["date"]
-            date = datetime.datetime.fromtimestamp(epoch).strftime('%m-%d-%Y %H:%M')
+            date = datetime.datetime.fromtimestamp(epoch).strftime('%m-%d-%Y')
             gemresponse = "{}'s quote has been added to the Gembox Vault".format(user)
             chat_id = item["message"]["chat"]["id"]
             from_ = item["message"]["from"]["id"]
@@ -43,38 +43,4 @@ while True:
                 msg = item["message"]["reply_to_message"]["text"]
                 try:
                     add_and_reply(msg, user, date, gemresponse, chat_id, from_)
-                except:
-                    print("add and reply failed")
-            
-                
-
-            
-
-"""
-def make_reply(msg, quoted_message, user, date, gemresponse, groupid, from_):
-    reply = None
-    if msg is not None:
-        update_gembox.gembox_bot(msg, quoted_message, user, date, gemresponse, groupid, from_)
-    return reply
-
-update_id = None
-while True:
-    db.setup()
-    updates = bot.get_updates(offset=update_id)
-    updates = updates["result"]
-    if updates:
-        for item in updates:
-            update_id = item["update_id"]
-            try:
-                message = str(item["message"]["text"])
-                quoted_message = str(item["message"]["reply_to_message"]["text"])
-            except:
-                raise KeyError
-            user = item["message"]["from"]["first_name"]
-            epoch = item["message"]["date"]
-            date = datetime.datetime.fromtimestamp(epoch).strftime('%c')
-            gemresponse = "{}'s quote has been added to the Gembox Vault".format(user)
-            groupid = item["message"]["chat"]["id"]
-            from_ = item["message"]["from"]["id"]
-
-            reply = make_reply(message, quoted_message, user, date, gemresponse, groupid, from_) """
+                except Exception as e: bot.send_message(e, chat_id)
