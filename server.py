@@ -33,6 +33,7 @@ while True:
             chat_id = item["message"]["chat"]["id"]
             from_ = item["message"]["from"]["id"]
             message = str(item["message"]["text"])
+            deletestr = '/@GemboxMiboss_bot delete'
             if message == '/view@GemboxMiboss_bot':
                 try:
                     reply = read_only(message)
@@ -44,3 +45,6 @@ while True:
                 try:
                     add_and_reply(msg, user, date, gemresponse, chat_id, from_)
                 except Exception as e: bot.send_message(e, chat_id)
+            if deletestr in message:
+                num = message[24:]
+                update_gembox.grab_description(num, chat_id)
