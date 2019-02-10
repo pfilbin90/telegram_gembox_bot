@@ -18,9 +18,13 @@ class DBHelper:
         self.conn.commit()
 
     def delete_item(self, item_text):
-        stmt = "DELETE FROM items WHERE description = (?)"
+        #stmt = "DELETE FROM items WHERE description = (?)"
+        stmt = "DELETE FROM items WHERE rowid = (?)"
+        stmt2 = "VACUUM"
         args = (item_text, )
         self.conn.execute(stmt, args)
+        self.conn.commit()
+        self.conn.execute(stmt2)
         self.conn.commit()
 
     def get_items(self):

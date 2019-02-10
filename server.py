@@ -15,7 +15,7 @@ def add_and_reply(msg, user, date, gemresponse, chat_id, from_):
 def read_only(message):
     reply = None
     if message is not None:
-        reply = update_gembox.gembox_read_vault(message)
+        reply = update_gembox.gembox_view()
     return reply
 
 update_id = None
@@ -33,7 +33,7 @@ while True:
             chat_id = item["message"]["chat"]["id"]
             from_ = item["message"]["from"]["id"]
             message = str(item["message"]["text"])
-            deletestr = '/@GemboxMiboss_bot delete'
+            deletestr = '@GemboxMiboss_bot delete'
             if message == '/view@GemboxMiboss_bot':
                 try:
                     reply = read_only(message)
@@ -47,4 +47,6 @@ while True:
                 except Exception as e: bot.send_message(e, chat_id)
             if deletestr in message:
                 num = message[24:]
-                update_gembox.grab_description(num, chat_id)
+                update_gembox.gembox_delete(num, chat_id)
+                reply = update_gembox.gembox_view()
+                bot.send_message(reply, chat_id)
