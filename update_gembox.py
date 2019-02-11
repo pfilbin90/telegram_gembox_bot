@@ -35,4 +35,17 @@ def gembox_delete(num, chat_id):
                 if str(num) == line[0]:
                     db.delete_item(line[0])
     except Exception as e: print(e)
+
+def gembox_commands(chat_id):
+    string = """COMMANDS:
+
+     -to ADD a Gembox- QUOTE or REPLY a message and type 'gembox'
+
+-to VIEW Gembox Vault-  "@GemboxMiboss_bot view"
+    
+-to DELETE a Gembox- "@GemboxMiboss_bot delete3" (use the number you wish to delete.  delete1, delete2, etc)
+
+I will respond to any mentions of my name.  More features to come soon.
+    """
+    bot.send_message(string, chat_id)
     
